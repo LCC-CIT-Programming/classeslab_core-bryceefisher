@@ -8,16 +8,16 @@ namespace CardTests
         static void Main(string[] args)
         {
             // calling test methods in main
-            TestCardConstructors();
+            // TestCardConstructors();
             // TestCardToString();
             // TestCardPropertyGetters();
             // TestCardPropertySetters();
             // TestCardPropertySettersWithExceptions();
-            /*
+            
             Card c2 = new Card(1, 4);
             TestHasMatchingSuit(c2);
             TestHasMatchingValue(c2);
-            */
+            
             // TestIsAce();
             // TestIsFaceCard();
             // TestIsRed();

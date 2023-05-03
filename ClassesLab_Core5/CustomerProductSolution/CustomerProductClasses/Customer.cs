@@ -60,7 +60,7 @@ namespace CustomerProductClasses
         
         public override string ToString()
         {
-            return $"ID: {Id} Name: {FirstName} Last Name: {LastName} Email: {EmailAddress} Phone Number: {PhoneNumber}";
+            return $"ID: {Id}, Name: {FirstName}, Last Name: {LastName}, Email: {EmailAddress}, Phone Number: {PhoneNumber}";
         }
 
     }

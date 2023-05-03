@@ -31,15 +31,15 @@ namespace CustomerProductTests
             Customer c2 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
             Console.WriteLine("Testing both constructors");
-            Console.WriteLine("Default constructor.  Expecting default values. " + c1.ToString());
-            Console.WriteLine("Overloaded constructor.  Expecting 1, John, Doe, John@gmail.com, 5555555555" +
-                              " -  Actual " + c2.ToString());
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("(Default constructor)  Expecting default values: " + c1.ToString());
+            Console.WriteLine("(Overloaded constructor)  Expecting 1, John, Doe, John@gmail.com, 5555555555 - " + c2.ToString());
             Console.WriteLine();
         }
 
         static void TestToString()
         {
-            // Product p1 = new Product(1, "T100", "This is a test product", 100M, 10);
+            // Product p1 = new Product(1,ﬁ "T100", "This is a test product", 100M, 10);
             //
             // Console.WriteLine("Testing ToString");
             // Console.WriteLine("Expecting 1, T100, 100, This is a test product, 10 " + p1.ToString());
@@ -49,7 +49,9 @@ namespace CustomerProductTests
             Customer c1 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
             Console.WriteLine("Testing ToString");
-            Console.WriteLine("Expecting 1, John, Doe, John@gmail.com, 5555555555" + " -  Actual " + c1.ToString());
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting 1, John, Doe, John@gmail.com, 5555555555 - " + c1.ToString());
+            Console.WriteLine();
         }
 
         static void TestPropertyGetters()
@@ -67,11 +69,13 @@ namespace CustomerProductTests
             Customer c1 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
             Console.WriteLine("Testing getters");
-            Console.WriteLine("Id.  Expecting 1. " + c1.Id);
-            Console.WriteLine("Name.  Expecting John. " + c1.FirstName);
-            Console.WriteLine("Last Name.  Expecting Doe. " + c1.LastName);
-            Console.WriteLine("Email. Expecting John@gmail.com. " + c1.EmailAddress);
-            Console.WriteLine("Phone Number.  Expecting 5555555555. " + c1.PhoneNumber);
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Id-  (Expecting 1): " + c1.Id);
+            Console.WriteLine("Name-  (Expecting John): " + c1.FirstName);
+            Console.WriteLine("Last Name-  (Expecting Doe): " + c1.LastName);
+            Console.WriteLine("Email- (Expecting John@gmail.com): " + c1.EmailAddress);
+            Console.WriteLine("Phone Number-  (Expecting 5555555555): " + c1.PhoneNumber);
+            Console.WriteLine();
         }
 
         static void TestPropertySetters()
@@ -90,6 +94,7 @@ namespace CustomerProductTests
             Customer c1 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
             Console.WriteLine("Testing setters");
+            Console.WriteLine("------------------------------------------------------------");
 
             c1.Id = 2;
             c1.FirstName = "Jane";
