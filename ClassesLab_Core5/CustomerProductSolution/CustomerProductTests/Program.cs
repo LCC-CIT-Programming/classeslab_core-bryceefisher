@@ -1,6 +1,7 @@
 ﻿using System;
 using CustomerProductClasses;
 
+
 namespace CustomerProductTests
 {
     class Program
@@ -8,25 +9,27 @@ namespace CustomerProductTests
         static void Main(string[] args)
         {
             // customer test methods
-            TestProductConstructors();
-            TestToString();
-            TestPropertyGetters();
-            TestPropertySetters();
+            // TestCustomerConstructors();
+            // TestToString();
+            // TestPropertyGetters();
+            // TestPropertySetters();
+            // TestCustomerEquals();
+            // TestCustomerEqualityOperators();
+            // GetCLCount();
+            // TestChangeCustomerByPosition();
+            // TestGetCustomerByEmail();
+            // TestRemoveCustomers();
+            // TestCustomerListToString();
+            // TestCustomerFill();
+            TestCustomerSave();
 
 
         }
-        
-        //test methods
-        static void TestProductConstructors()
-        {
-            // Product p1 = new Product();
-            // Product p2 = new Product(1, "T100", "This is a test product", 100M, 10);
-            //
-            // Console.WriteLine("Testing both constructors");
-            // Console.WriteLine("Default constructor.  Expecting default values. " + p1.ToString());
-            // Console.WriteLine("Overloaded constructor.  Expecting 1, T100, 100, This is a test product, 10 " + p2.ToString());
-            // Console.WriteLine();
 
+        #region Customer Test Methods
+        //test methods
+        static void TestCustomerConstructors()
+        {
             Customer c1 = new Customer();
             Customer c2 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
@@ -39,12 +42,6 @@ namespace CustomerProductTests
 
         static void TestToString()
         {
-            // Product p1 = new Product(1,ﬁ "T100", "This is a test product", 100M, 10);
-            //
-            // Console.WriteLine("Testing ToString");
-            // Console.WriteLine("Expecting 1, T100, 100, This is a test product, 10 " + p1.ToString());
-            // Console.WriteLine("Expecting 1, T100, 100, This is a test product, 10 " + p1);
-            // Console.WriteLine();
 
             Customer c1 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
@@ -56,15 +53,6 @@ namespace CustomerProductTests
 
         static void TestPropertyGetters()
         {
-            // Product p1 = new Product(1, "T100", "This is a test product", 100M, 10);
-            //
-            // Console.WriteLine("Testing getters");
-            // Console.WriteLine("Id.  Expecting 1. " + p1.Id);
-            // Console.WriteLine("Code.  Expecting T100. " + p1.Code);
-            // Console.WriteLine("Description.  Expecting This is a test product. " + p1.Description);
-            // Console.WriteLine("Price.  Expecting 100. " + p1.UnitPrice);
-            // Console.WriteLine("Quantity.  Expecting 10. " + p1.QuantityOnHand);
-            // Console.WriteLine();
 
             Customer c1 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
@@ -80,16 +68,6 @@ namespace CustomerProductTests
 
         static void TestPropertySetters()
         {
-            // Product p1 = new Product(1, "T100", "This is a test product", 100M, 10);
-            //
-            // Console.WriteLine("Testing setters");
-            // p1.Id = 2;
-            // p1.Code = "T000";
-            // p1.Description = "First product";
-            // p1.UnitPrice = 200;
-            // p1.QuantityOnHand = 20;
-            // Console.WriteLine("Expecting 2, T000, 200, First product, 20 " + p1);
-            // Console.WriteLine();
 
             Customer c1 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
 
@@ -104,5 +82,207 @@ namespace CustomerProductTests
 
             Console.WriteLine(c1.ToString());
         }
+
+        static void TestCustomerEquals()
+        {
+            Customer c1 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
+            Customer c1Reference = c1;
+            Customer c2 = new Customer(1, "John", "Doe", "John@gmail.com", "5555555555");
+            Customer c3 = new Customer();
+
+            Console.WriteLine("Expecting True:");
+            Console.WriteLine("---------------------------------------------------------------");
+            Console.WriteLine(c1.Equals(c1Reference));
+            Console.WriteLine(c1.Equals(c2));
+            Console.WriteLine("Expecting False:");
+            Console.WriteLine("---------------------------------------------------------------");
+            Console.WriteLine(c1.Equals(c3));
+            
+        }
+
+        static void TestCustomerEqualityOperators()
+        {
+            Customer c1 = new Customer(1, "John", "Doe", "john@gmail.com", "5555555555");
+            Customer c2 = new Customer(1, "John", "Doe", "john@gmail.com", "5555555555");
+            Customer c3 = new Customer();
+
+            Console.WriteLine("Expecting True:");
+            Console.WriteLine("---------------------------------------------------------------");
+            Console.WriteLine(c1 == c2);
+            Console.WriteLine("Expecting False:");
+            Console.WriteLine("---------------------------------------------------------------");
+            Console.WriteLine(c1 == c3);
+            Console.WriteLine(c1 != c2);
+        }
+        #endregion
+
+        #region CustomerList Test Methods
+
+        static void GetCLCount()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+
+            Console.WriteLine("Testing Count");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting 2: " + cl.Count);
+        }
+
+        static void TestGetCustomerByIndex()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+            cl.Add(3, "Jonny", "Doe", "Jonny@gmail.com", "5555555557");
+
+            Console.WriteLine("Testing GetCustomerByIndex");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting 1, John, Doe, John@gmail.com, 5555555555: ");
+            Console.WriteLine(cl[0].ToString());
+        }
+
+        static void TestChangeCustomerByPosition()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+            cl.Add(3, "Jonny", "Doe", "Jonny@gmail.com", "5555555557");
+
+            cl[1] = new Customer(4, "Jill", "Doe", "jill@gmail.com", "5555555558");
+
+            Console.WriteLine("Testing ChangeCustomerByPosition");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting: 4, Jill, Doe, jill@gmail.com, 5555555558");
+            Console.WriteLine(cl[1].ToString());
+        }
+
+        static void TestGetCustomerByEmail()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+            cl.Add(3, "Jonny", "Doe", "jonny@gmail.com", "5555555557");
+
+            Console.WriteLine("Testing GetCustomerByEmail");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting 3, Jonny, Doe, jonny@gmail.com, 5555555557: ");
+            try
+            {
+                Console.WriteLine(cl["jonny@gmail.com"].ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Can't find customer with that email.");
+            }
+            
+        }
+
+        static void TestAddCustomers()
+        {
+            CustomerList cl = new CustomerList();
+            Customer c = new Customer(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+            Customer c2 = new Customer(3, "Jonny", "Doe", "jonny@gmail.com", "5555555557");
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(c);
+            cl += c2;
+            
+
+            Console.WriteLine("Testing Add");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting three customers: with ID 1, 2, and 3: ");
+            foreach (Customer customer in cl)
+            {
+                Console.WriteLine(customer.ToString());
+            }
+        }
+
+        static void TestRemoveCustomers()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+            cl.Add(3, "Jonny", "Doe", "jonny@gmail.com", "5555555557");
+
+            cl.Remove(cl[0]);
+            cl -= cl[0];
+            cl = cl - 1;
+            
+
+            Console.WriteLine("Testing Remove");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting zero customers: ");
+            foreach (Customer customer in cl)
+            {
+                Console.WriteLine(customer.ToString());
+            }
+
+        }
+
+        static void TestCustomerListToString()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+            cl.Add(3, "Jonny", "Doe", "jonny@gmail.com", "5555555557");
+
+            Console.WriteLine("Testing ToString");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting three customers with ID's 1, 2, and 3.");
+            foreach (Customer customer in cl)
+            {
+                Console.WriteLine(customer.ToString());
+            }
+        }
+
+        static void TestCustomerFill()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Fill();
+
+            Console.WriteLine("Testing Fill");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting 2 customers: ");
+            foreach (Customer customer in cl)
+            {
+                Console.WriteLine(customer.ToString());
+            }
+        }
+
+        static void TestCustomerSave()
+        {
+            CustomerList cl = new CustomerList();
+            cl.Add(1, "John", "Doe", "John@gmail.com", "5555555555");
+            cl.Add(2, "Jane", "Doe", "jane@gmail.com", "5555555556");
+            cl.Add(3, "Jonny", "Doe", "jonny@gmail.com", "5555555557");
+            
+            cl.Save();
+
+            cl = cl - 3;
+
+            Console.WriteLine("Testing Save");
+            Console.WriteLine("------------------------------------------------------------");
+            Console.WriteLine("Expecting 0 customers: ");
+            
+            foreach (Customer customer in cl)
+            {
+                Console.WriteLine(customer.ToString());
+            }
+            
+            cl.Fill();
+
+            Console.WriteLine("Expecting 3 customers: ");
+            
+            foreach (Customer customer in cl)
+            {
+                Console.WriteLine(customer.ToString());
+            }
+        }
+
+
+
+
+        #endregion
+
     }
 }
