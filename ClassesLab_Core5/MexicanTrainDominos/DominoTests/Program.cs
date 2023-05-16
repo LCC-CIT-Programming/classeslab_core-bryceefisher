@@ -9,7 +9,7 @@ namespace DominoTests
         static void Main(string[] args)
         {
             
-            //Test Methods
+            //Domino Test Methods
             
             // TestDominoConstructors();
             // TestDominoToString();
@@ -19,6 +19,8 @@ namespace DominoTests
             // TestDominoScore();
             // TestDominoIsDouble();
             // TestDominoPropertySettersWithExceptions();
+            
+            //Boneyard Test Methods
             // TestBoneyardConstructor();
             // TestBoneyardToString();
             // TestBoneyardGetters();
@@ -163,21 +165,39 @@ namespace DominoTests
         static void TestBoneyardConstructor()
         {
             Boneyard b = new Boneyard(6);
-
-            Console.WriteLine(b.ToString());
+            
+            Console.WriteLine("Testing constructor");
+            Console.WriteLine("Expecting 28 dominoes:");
+            int count = 1;
+            foreach (Domino d in b)
+            {
+                Console.WriteLine($"{count}: {d}");
+                count++;
+            }
         }
 
         static void TestBoneyardToString()
         {
             Boneyard b = new Boneyard(6);
-            Console.WriteLine(b.ToString());
+
+            Console.WriteLine("Testing ToString");
+            Console.WriteLine("Expecting 28 dominoes:");
+            int count = 1;
+            foreach (Domino d in b)
+            {
+                Console.WriteLine($"{count}: {d}");
+                count++;
+            }
         }
 
         static void TestBoneyardGetters()
         {
             Boneyard b = new Boneyard(6);
 
+            Console.WriteLine("Testing getters");
+            Console.Write("Expecting 28: ");
             Console.WriteLine(b.DominoesRemaining);
+            Console.WriteLine("Expecting Side 1: 0  Side 2: 5");
             Console.WriteLine(b[5]);
         }
 
@@ -187,6 +207,8 @@ namespace DominoTests
 
             b[5] = new Domino(3, 4);
 
+            Console.WriteLine("Testing setters");
+            Console.WriteLine("Expecting Side 1: 3  Side 2: 4");
             Console.WriteLine(b[5]);
         }
 
@@ -196,20 +218,24 @@ namespace DominoTests
             
             b.Shuffle();
 
-            Console.WriteLine(b.ToString());
+            Console.WriteLine("Testing Shuffle");
+            Console.WriteLine("Expecting domino at index 0 to rarely be Side 1: 0  Side 2: 0");
+            Console.WriteLine($"Domino at index 0: {b[0]}");
         }
 
         static void TestBoneyardIsEmpty()
         {
             Boneyard b = new Boneyard(6);
 
+            Console.WriteLine("Testing IsEmpty");
+            Console.WriteLine("Expecting false: " + b.IsEmpty());
+
             for (int i = b.DominoesRemaining; i > 0; i--)
             {
                 b.Draw();
             }
 
-            Console.WriteLine(b.DominoesRemaining);
-            Console.WriteLine(b.IsEmpty());
+            Console.WriteLine("Expecting true: " + b.IsEmpty());
         
         }
 
@@ -217,8 +243,12 @@ namespace DominoTests
         {
             Boneyard boneyard = new Boneyard(6);
 
-            Console.WriteLine(boneyard.Draw());
-            Console.WriteLine(boneyard.Draw());
+            boneyard.Draw();
+            boneyard.Draw();
+            
+            Console.WriteLine("Testing Draw");
+
+            Console.WriteLine("Expecting 26: " + boneyard.DominoesRemaining);
             
         }
 
