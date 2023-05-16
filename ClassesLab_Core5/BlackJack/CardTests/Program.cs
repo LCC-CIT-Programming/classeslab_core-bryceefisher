@@ -13,11 +13,11 @@ namespace CardTests
             // TestCardPropertyGetters();
             // TestCardPropertySetters();
             // TestCardPropertySettersWithExceptions();
-            
-            Card c2 = new Card(1, 4);
-            TestHasMatchingSuit(c2);
-            TestHasMatchingValue(c2);
-            
+
+            // Card c2 = new Card(1, 4);
+            // TestHasMatchingSuit(c2);
+            // TestHasMatchingValue(c2);
+
             // TestIsAce();
             // TestIsFaceCard();
             // TestIsRed();
@@ -26,6 +26,9 @@ namespace CardTests
             // TestIsDiamond();
             // TestIsHeart();
             // TestIsSpade();
+            TestDeckConstructor();
+            TestDeckShuffle();
+            TestDeckDeal();
         }
 
         //test methods
@@ -187,6 +190,52 @@ namespace CardTests
             Console.WriteLine("Testing IsSpade");
             Console.WriteLine("(Expecting Spade): ");
             Console.WriteLine(c1.IsSpade() ? "Spade" : "Not Spade");
+        }
+
+
+        static void TestDeckConstructor()
+        {
+            Deck d = new Deck();
+
+            Console.WriteLine("Testing deck of cards default constructor");
+            Console.WriteLine("NumCards.  Expecting 52. " + d.NumCards);
+            Console.WriteLine("IsEmpty.   Expecting false. " + d.IsEmpty);
+            Console.WriteLine("ToString.  Expect a ton of cards in order.\n" + d.ToString());
+            Console.WriteLine();
+        }
+
+        static void TestDeckShuffle()
+        {
+            Deck d = new Deck();
+            d.Shuffle();
+            Console.WriteLine("Testing deck of cards shuffle");
+            Console.WriteLine("NumCards.  Expecting 52. " + d.NumCards);
+            Console.WriteLine("IsEmpty.   Expecting false. " + d.IsEmpty);
+            Console.WriteLine("First Card will rarely be the Ace of Clubs. " + d[0]);
+            Console.WriteLine("ToString.  Expect a ton of cards in shuffled order.\n" + d.ToString());
+            Console.WriteLine();
+        }
+
+        static void TestDeckDeal()
+        {
+            Deck d = new Deck();
+            Card c = d.Deal();
+
+            Console.WriteLine("Testing deck of cards deal");
+            Console.WriteLine("NumCards.  Expecting 51. " + d.NumCards);
+            Console.WriteLine("IsEmpty.   Expecting false. " + d.IsEmpty);
+            Console.WriteLine("Dealt Card should be Ace of Clubs. " + c);
+
+            // now let's deal them all and see what happens at the end
+            for (int i = 1; i <= 51; i++)
+                c = d.Deal();
+            Console.WriteLine("Dealt all 52 cards");
+            Console.WriteLine("NumCards.  Expecting 0. " + d.NumCards);
+            Console.WriteLine("IsEmpty.   Expecting true. " + d.IsEmpty);
+            Console.WriteLine("Last Card should be King of Spades. " + c);
+            Console.WriteLine("Dealing again should return null. Expecting true. " + (d.Deal() == null));
+
+            Console.WriteLine();
         }
     }
 }

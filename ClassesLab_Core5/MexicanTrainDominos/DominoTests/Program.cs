@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.Linq;
 using DominoClasses;
 
 namespace DominoTests
@@ -8,17 +8,29 @@ namespace DominoTests
     {
         static void Main(string[] args)
         {
-
-            TestDominoConstructors();
-            TestDominoToString();
-            TestDominoPropertyGetters();
-            TestDominoPropertySetters();
-            TestDominoFlip();
-            TestDominoScore();
-            TestDominoIsDouble();
-            TestDominoPropertySettersWithExceptions();
+            
+            //Test Methods
+            
+            // TestDominoConstructors();
+            // TestDominoToString();
+            // TestDominoPropertyGetters();
+            // TestDominoPropertySetters();
+            // TestDominoFlip();
+            // TestDominoScore();
+            // TestDominoIsDouble();
+            // TestDominoPropertySettersWithExceptions();
+            // TestBoneyardConstructor();
+            // TestBoneyardToString();
+            // TestBoneyardGetters();
+            // TestBoneyardSetters();
+            // TestBoneyardShuffle();
+            // TestBoneyardIsEmpty();
+            TestBoneyardDraw();
         }
 
+        #region Domino Tests
+        
+        //Domino test Methods
         static void TestDominoConstructors()
         {
             Domino d1 = new Domino();
@@ -144,5 +156,74 @@ namespace DominoTests
             Console.WriteLine("After.  Expecting 6, 12. " + d1);
             Console.WriteLine();
         }
+        #endregion
+
+        #region Boneyard Tests
+        // Boneyard Test Methods
+        static void TestBoneyardConstructor()
+        {
+            Boneyard b = new Boneyard(6);
+
+            Console.WriteLine(b.ToString());
+        }
+
+        static void TestBoneyardToString()
+        {
+            Boneyard b = new Boneyard(6);
+            Console.WriteLine(b.ToString());
+        }
+
+        static void TestBoneyardGetters()
+        {
+            Boneyard b = new Boneyard(6);
+
+            Console.WriteLine(b.DominoesRemaining);
+            Console.WriteLine(b[5]);
+        }
+
+        static void TestBoneyardSetters()
+        {
+            Boneyard b = new Boneyard(6);
+
+            b[5] = new Domino(3, 4);
+
+            Console.WriteLine(b[5]);
+        }
+
+        static void TestBoneyardShuffle()
+        {
+            Boneyard b = new Boneyard(6);
+            
+            b.Shuffle();
+
+            Console.WriteLine(b.ToString());
+        }
+
+        static void TestBoneyardIsEmpty()
+        {
+            Boneyard b = new Boneyard(6);
+
+            for (int i = b.DominoesRemaining; i > 0; i--)
+            {
+                b.Draw();
+            }
+
+            Console.WriteLine(b.DominoesRemaining);
+            Console.WriteLine(b.IsEmpty());
+        
+        }
+
+        static void TestBoneyardDraw()
+        {
+            Boneyard boneyard = new Boneyard(6);
+
+            Console.WriteLine(boneyard.Draw());
+            Console.WriteLine(boneyard.Draw());
+            
+        }
+
+
+
+        #endregion
     }
 }
