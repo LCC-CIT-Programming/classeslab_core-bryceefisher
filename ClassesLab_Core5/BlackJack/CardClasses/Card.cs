@@ -14,6 +14,11 @@ namespace CardClasses
         private int _value;
         private int _suit;
 
+        #region Constructors
+
+        
+
+        
         //Constructors
         //default constructor
         public Card()
@@ -26,7 +31,10 @@ namespace CardClasses
             _value = v;
             _suit = s;
         }
+        #endregion
 
+        #region Properties
+        
         //Properties
         public int Value
         {
@@ -60,7 +68,10 @@ namespace CardClasses
                 }
             }
         }
+        #endregion
 
+        #region Methods
+        
         // Class Methods
 
         public override string ToString()
@@ -188,5 +199,26 @@ namespace CardClasses
                 return false;
             }
         }
+        
+        public override int GetHashCode()
+        {
+            return 13 + 7 * _value.GetHashCode() +
+                   7 * _suit.GetHashCode();
+
+        }
+        
+        public override bool Equals(object obj)
+        {
+            if (obj == null || obj.GetType() != this.GetType())
+                return false;
+            else
+            {
+                Card other = (Card)obj;
+                return other.Value == Value &&
+                       other.Suit == Suit;
+            }
+        }
+        
+        #endregion
     }
 }

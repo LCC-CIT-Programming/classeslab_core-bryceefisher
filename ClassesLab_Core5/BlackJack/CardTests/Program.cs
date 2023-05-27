@@ -26,10 +26,26 @@ namespace CardTests
             // TestIsDiamond();
             // TestIsHeart();
             // TestIsSpade();
-            TestDeckConstructor();
-            TestDeckShuffle();
-            TestDeckDeal();
+            // TestDeckConstructor();
+            // TestDeckShuffle();
+            // TestDeckDeal();
+            
+            // Hand tests
+            // TestHandConstructors();
+            // TestHandGetter();
+            // TestHandAddCard();
+            // TestHandHasCard();
+            // TestHandIndexOf();
+            
+            //BJHand Tests
+            // TestBJHandConstructors();
+            // TestBJHandGetters();
+            
+            
+
         }
+
+        #region Card Tests
 
         //test methods
         static void TestCardConstructors()
@@ -192,6 +208,9 @@ namespace CardTests
             Console.WriteLine(c1.IsSpade() ? "Spade" : "Not Spade");
         }
 
+        #endregion
+
+        #region Deck Tests
 
         static void TestDeckConstructor()
         {
@@ -237,5 +256,125 @@ namespace CardTests
 
             Console.WriteLine();
         }
+        #endregion
+
+        #region Hand Tests
+
+        static void TestHandConstructors()
+        {
+            Deck d = new Deck();
+            Hand h1 = new Hand();
+            Hand h2 = new Hand(d, 5);
+
+            Console.WriteLine("Testing hand constructors");
+            Console.WriteLine("h1. Expecting 0 cards. " + h1);
+            Console.WriteLine("h2. Expecting 5 cards. " + "\n" + h2);
+            Console.WriteLine();
+        }
+
+        static void TestHandGetter()
+        {
+            Deck d = new Deck();
+            
+            Hand h = new Hand(d, 5);
+            
+            Console.WriteLine("Testing hand getters");
+            Console.WriteLine("Expecting 5 cards. " + h.NumCards);
+        }
+
+        static void TestHandAddCard()
+        {
+            Deck d = new Deck();
+            Hand h = new Hand();
+            
+            h.AddCard(d[0]);
+
+            Console.WriteLine("Testing hand add card");
+            Console.WriteLine("Expecting 1 card. " + h.NumCards);
+            Console.WriteLine(h.ToString());
+        }
+
+        static void TestHandDiscard()
+        {
+            Deck d = new Deck();
+            Hand h = new Hand(d, 5);
+            
+            h.Discard(0);
+
+            Console.WriteLine("Testing hand discard");
+            Console.WriteLine("Expecting 4 cards. " + h.NumCards);
+            Console.WriteLine(h.ToString());
+        }
+
+        static void TestHandHasCard()
+        {
+            Deck d = new Deck();
+            
+            Hand h = new Hand(d, 5);
+            
+            Console.WriteLine("Testing hand has card (Card)");
+            Console.WriteLine("Expecting true. " + h.HasCard(d[0]));
+            Console.WriteLine("Testing hand has card (v, s)");
+            Console.WriteLine("Expecting true. " + h.HasCard(1, 1));
+            Console.WriteLine("Testing hand has card (v)");
+            Console.WriteLine("Expecting false. " + h.HasCard(4));
+        }
+
+        static void TestHandIndexOf()
+        {
+            Deck d = new Deck();
+            
+            Hand h = new Hand(d, 5);
+            
+            Console.WriteLine("Testing hand index of (Card)");
+            Console.WriteLine("Expecting 2. " + h.IndexOf(d[2]));
+            Console.WriteLine("Testing hand index of (v, s)");
+            Console.WriteLine("Expecting 4. " + h.IndexOf(2, 1));
+            Console.WriteLine("Testing hand index of (v)");
+            Console.WriteLine("Expecting 4. " + h.IndexOf(2));
+            Console.WriteLine("Testing hand index of (Card) not in hand");
+            Console.WriteLine("Expecting -1. " + h.IndexOf(d[51]));
+            Console.WriteLine("Testing hand index of (v, s) not in hand");
+            Console.WriteLine("Expecting -1. " + h.IndexOf(4, 4));
+            Console.WriteLine("Testing hand index of (v) not in hand");
+            Console.WriteLine("Expecting -1. " + h.IndexOf(4));
+            
+        }
+        
+        
+
+        #endregion
+
+        #region BjHand Tests
+
+        static void TestBJHandConstructors()
+        {
+           Deck d = new Deck();
+           
+           BjHand bj1 = new BjHand();
+           BjHand bj2 = new BjHand(d, 5);
+
+           Console.WriteLine("Testing bjhand constructors");
+           Console.WriteLine("bj1. Expecting 0 cards. " + bj1);
+           Console.WriteLine("bj2. Expecting 5 cards. " + "\n" + bj2);
+        }
+        
+        static void TestBJHandGetters()
+        {
+            Deck d = new Deck();
+            
+            BjHand bj = new BjHand(d, 5);
+
+            Console.WriteLine("Testing bjhand getters");
+            Console.WriteLine("Score: " + bj.Score);
+            Console.WriteLine("IsBusted: " + bj.IsBusted);
+            Console.WriteLine("HasAce: " + bj.HasAce);
+            Console.WriteLine("Testing IsBusted");
+            BjHand bj2 = new BjHand(d, 13);
+            Console.WriteLine("Score: " + bj2.Score);
+            Console.WriteLine("IsBusted: " + bj2.IsBusted);
+        }
+
+        #endregion
     }
 }

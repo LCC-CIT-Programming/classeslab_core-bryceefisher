@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Xml.Serialization;
 
 namespace CustomerProductClasses
 {
+    [XmlType("Product")] //define type
+    [XmlInclude(typeof(Clothing)), XmlInclude(typeof(Gear))]
     public class Product
     {
         private int id;
