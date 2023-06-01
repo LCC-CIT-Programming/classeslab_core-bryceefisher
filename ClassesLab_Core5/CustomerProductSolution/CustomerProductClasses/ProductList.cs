@@ -34,6 +34,20 @@ namespace CustomerProductClasses
                 _products[i] = value;
             }
         }
+        
+        public decimal ShippingCharge
+        {
+            get
+            {
+                decimal total = 0;
+                foreach (Product p in _products)
+                    // this won't work unless ALL classes implement shippingcharge
+                    total += p.ShippingCharge;
+
+                return total;
+
+            }
+        }
 
         public Product this[string code]
         {
@@ -69,11 +83,11 @@ namespace CustomerProductClasses
             _products.Add(product);
         }
 
-        public void Add(int id, string code, string description, decimal price, int quantity)
-        {
-            Product p = new Product(id, code, description, price, quantity);
-            _products.Add(p);
-        }
+        // public void Add(int id, string code, string description, decimal price, int quantity)
+        // {
+        //     Product p = new Product(id, code, description, price, quantity);
+        //     _products.Add(p);
+        // }
 
         public void Remove(Product product)
         {

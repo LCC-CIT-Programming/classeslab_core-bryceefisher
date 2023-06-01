@@ -43,6 +43,9 @@ namespace CustomerProductClasses
         // property procedures.  There's nothing new here.
         // Notice that a clothing object has 10 properties.   5 are defined in Product.
         // Only the clothing specific properties are defined here
+
+        #region Properties
+        
         public string Category
         {
              get
@@ -102,6 +105,16 @@ namespace CustomerProductClasses
                 brand = value;
             }
         }
+        #endregion
+        
+        public override decimal ShippingCharge
+        {
+            get
+            {
+                return 1M;
+            }
+        }
+    
 
         // Replace ToString in Product with this clothing specific version of ToString
         public override string ToString()

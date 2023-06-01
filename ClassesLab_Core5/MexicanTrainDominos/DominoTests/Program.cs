@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Threading.Channels;
 using DominoClasses;
 
 namespace DominoTests
@@ -10,7 +11,6 @@ namespace DominoTests
         {
             
             //Domino Test Methods
-            
             // TestDominoConstructors();
             // TestDominoToString();
             // TestDominoPropertyGetters();
@@ -27,7 +27,15 @@ namespace DominoTests
             // TestBoneyardSetters();
             // TestBoneyardShuffle();
             // TestBoneyardIsEmpty();
-            TestBoneyardDraw();
+            // TestBoneyardDraw();
+            
+            //Train Tests
+            // TestMexicanTrainConstructors();
+            // TestMexicanTrainIsPlayable();
+            // TestPlay();
+            // TestIsOpen();
+            // TestClose();
+            TestPlayerTrainIsPlayable();
         }
 
         #region Domino Tests
@@ -253,6 +261,94 @@ namespace DominoTests
         }
 
 
+
+        #endregion
+
+        #region Train Tests
+
+        //Also tests Add, Count, IsEmpty, LastDomino, toString and PlayableValue through the call to ToString
+        static void TestMexicanTrainConstructors()
+        {
+            Domino d1 = new Domino(12, 6);
+            MexicanTrain train2 = new MexicanTrain();
+            MexicanTrain train = new MexicanTrain(6);
+            Console.WriteLine("Testing is empty");
+            Console.WriteLine("Expecting true: " + train.IsEmpty);
+            train.Add(d1);
+
+            Console.WriteLine("Testing constructor");
+            Console.WriteLine("Expecting 1 domino in the train:");
+            Console.WriteLine(train.ToString());
+            Console.WriteLine("Expecting empty train:");
+            Console.WriteLine(train2.ToString());
+        }
+
+        static void TestMexicanTrainIsPlayable()
+        {
+            Hand h = new Hand();
+            Domino d1 = new Domino(12, 6);
+            Domino d2 = new Domino(12, 12);
+            MexicanTrain train = new MexicanTrain(6);
+            train.Add(d1);
+
+            Console.WriteLine("Expecting true (IsPlayable): ");
+            Console.WriteLine(train.IsPlayable(h, d1, out bool mustFlip));
+            Console.WriteLine("Expecting false (IsPlayable): ");
+            Console.WriteLine(train.IsPlayable(h, d2, out mustFlip));
+        }
+
+        static void TestPlay()
+        {
+            Hand h = new Hand();
+            Domino d1 = new Domino(12, 4);
+            MexicanTrain train = new MexicanTrain(6);
+            MexicanTrain train2 = new MexicanTrain(4);
+
+            Console.WriteLine("Testing Play");
+            Console.WriteLine("Expecting success:");
+            train2.Play(h, d1);
+            Console.WriteLine(train2.ToString());
+
+            
+            Console.WriteLine("Expecting error:");
+            train.Play(h, d1);
+        }
+
+        static void TestIsOpen()
+        {
+            Hand h = new Hand();
+            PlayerTrain train = new PlayerTrain(h, 6);
+            
+            Console.WriteLine("Testing IsOpen");
+            Console.WriteLine("Expecting false: " + train.IsOpen);
+            train.Open();
+            Console.WriteLine("Expecting true: " + train.IsOpen);
+        }
+
+        static void TestClose()
+        {
+            Hand h = new Hand();
+            PlayerTrain train = new PlayerTrain(h, 6);
+
+            train.Open();
+            Console.WriteLine("Testing Close");
+            Console.WriteLine("Expecting Open (true): " + train.IsOpen);
+            train.Close();
+            Console.WriteLine("Expecting Closed (false): " + train.IsOpen);
+        }
+
+        static void TestPlayerTrainIsPlayable()
+        {
+            Hand h = new Hand();
+            Domino d1 = new Domino(12, 6);
+            PlayerTrain train = new PlayerTrain(h, 6);
+            PlayerTrain train2 = new PlayerTrain(h, 4);
+            bool mustFlip;
+            
+            Console.WriteLine("Testing IsPlayable");
+            Console.WriteLine("Expecting true: " + train.IsPlayable(h, d1, out mustFlip));
+            Console.WriteLine("Expecting false: " + train2.IsPlayable(h, d1, out mustFlip));
+        }
 
         #endregion
     }

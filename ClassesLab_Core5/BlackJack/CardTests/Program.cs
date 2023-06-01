@@ -38,8 +38,8 @@ namespace CardTests
             // TestHandIndexOf();
             
             //BJHand Tests
-            // TestBJHandConstructors();
-            // TestBJHandGetters();
+            TestBJHandConstructors();
+            TestBJHandGetters();
             
             
 

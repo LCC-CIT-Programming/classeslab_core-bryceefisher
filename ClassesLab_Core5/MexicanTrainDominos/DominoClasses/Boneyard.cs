@@ -29,7 +29,7 @@ namespace DominoClasses
 
         #region Properties
         
-        //Preoperty that returns the num of dominoes
+        //Property that returns the num of dominoes
         public int DominoesRemaining => _listOfDominoes.Count;
         
         //Property that lets the user retrieve or change a dominoes value by index
@@ -97,7 +97,7 @@ namespace DominoClasses
         
         #region Interfaces   
 
-        // impliment the IEnumerable interface to allow use of a foreach loop in testing
+        // implement the IEnumerable interface to allow use of a foreach loop in testing
         public IEnumerator<Domino> GetEnumerator()
         {
             //for each Domino in the list

@@ -91,7 +91,15 @@ namespace CustomerProductClasses
                 weight = value;
             }
         }
-
+        
+        public override decimal ShippingCharge
+        {
+            get
+            {
+                return 1M * (decimal)Weight;
+            }
+        }
+        
         // Replace version in Product with gear specific version
         public override string ToString()
         {
