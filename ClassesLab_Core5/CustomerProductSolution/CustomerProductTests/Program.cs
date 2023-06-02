@@ -36,9 +36,9 @@ namespace CustomerProductTests
 
             // abstract class and interface tests
             // TestToString();
-            TestShippingCharge();
+            // TestShippingCharge();
             // TestCompareTo();
-            //TestForEach();
+            TestForEach();
 
             Console.ReadLine();
         }
@@ -76,7 +76,7 @@ namespace CustomerProductTests
         
             // this actually blows up before IComparable
             list.Sort();
-            Console.WriteLine("BEFORE SORT.  Expect 4 products total, sorted by code \n" + list.ToString());
+            Console.WriteLine("AFTER SORT.  Expect 4 products total, sorted by code \n" + list.ToString());
         }
         
         static void TestForEach()

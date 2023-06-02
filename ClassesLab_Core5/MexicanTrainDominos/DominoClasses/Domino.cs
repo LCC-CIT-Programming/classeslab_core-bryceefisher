@@ -2,10 +2,12 @@
 
 namespace DominoClasses
 {
-    public class Domino
+    public class Domino : IComparable<Domino>
     {
         private int side1;
         private int side2;
+        private IComparable<Domino> _comparableImplementation;
+        private IComparable<Domino> _comparableImplementation1;
 
         public int Side1
         {
@@ -55,9 +57,7 @@ namespace DominoClasses
 
         public void Flip()
         {
-            int temp = side1;
-            side1 = side2;
-            side2 = temp;
+            (side1, side2) = (side2, side1);
         }
 
         // this is a READ-ONLY property
@@ -77,18 +77,13 @@ namespace DominoClasses
             else
                 return false;
         }
-        /*
-        public bool IsDouble
+        
+        // required for IComparable, compares the scores of two dominoes
+        public int CompareTo(Domino other)
         {
-            get
-            {
-                if (side1 == side2)
-                    return true;
-                else
-                    return false;
-            }
+            return this.Score.CompareTo(other.Score);
         }
-        */
+
 
         public override string ToString()
         {

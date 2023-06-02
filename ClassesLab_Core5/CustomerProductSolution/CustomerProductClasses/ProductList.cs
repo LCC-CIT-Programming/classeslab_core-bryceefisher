@@ -1,8 +1,9 @@
+using System.Collections;
 using System.Collections.Generic;
 
 namespace CustomerProductClasses
 {
-    public class ProductList
+    public class ProductList : IEnumerable<Product>
     {
         private List<Product> _products;
 
@@ -94,6 +95,11 @@ namespace CustomerProductClasses
             _products.Remove(product);
         }
 
+        public IEnumerator<Product> GetEnumerator()
+        {
+            return _products.GetEnumerator();
+        }
+
         public override string ToString()
         {
             string output = "";
@@ -102,6 +108,11 @@ namespace CustomerProductClasses
                 output += p.ToString() + "\n";
             }
             return output;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return ((IEnumerable)_products).GetEnumerator();
         }
 
         public static ProductList operator +(ProductList pl, Product p)
@@ -123,6 +134,11 @@ namespace CustomerProductClasses
                 pl._products.RemoveAt(0);
             }
             return pl;
+        }
+
+        public void Sort()
+        {
+            _products.Sort();
         }
         
         #endregion

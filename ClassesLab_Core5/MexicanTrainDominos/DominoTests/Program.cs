@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Channels;
 using DominoClasses;
@@ -10,7 +11,6 @@ namespace DominoTests
         static void Main(string[] args)
         {
             
-            //Domino Test Methods
             // TestDominoConstructors();
             // TestDominoToString();
             // TestDominoPropertyGetters();
@@ -19,8 +19,7 @@ namespace DominoTests
             // TestDominoScore();
             // TestDominoIsDouble();
             // TestDominoPropertySettersWithExceptions();
-            
-            //Boneyard Test Methods
+            //     
             // TestBoneyardConstructor();
             // TestBoneyardToString();
             // TestBoneyardGetters();
@@ -28,18 +27,23 @@ namespace DominoTests
             // TestBoneyardShuffle();
             // TestBoneyardIsEmpty();
             // TestBoneyardDraw();
-            
-            //Train Tests
+            //
+            // // Train Tests
+            // // constructor test tests Add, Count, IsEmpty, LastDomino, toString and PlayableValue through the call to ToString
             // TestMexicanTrainConstructors();
             // TestMexicanTrainIsPlayable();
             // TestPlay();
             // TestIsOpen();
             // TestClose();
-            TestPlayerTrainIsPlayable();
+            // TestPlayerTrainIsPlayable();
+            //
+            // // Interface Tests
+            // TestIComparable();
+            TestIEnumerable();
         }
 
         #region Domino Tests
-        
+
         //Domino test Methods
         static void TestDominoConstructors()
         {
@@ -97,6 +101,7 @@ namespace DominoTests
                 Console.WriteLine("Threw an exception when Side1 is negative");
                 Console.WriteLine("Side1 should still be 12 " + d1.Side1);
             }
+
             try
             {
                 d1.Side1 = 13;
@@ -106,6 +111,7 @@ namespace DominoTests
                 Console.WriteLine("Threw an exception when Side1 is more than 12");
                 Console.WriteLine("Side1 should still be 12 " + d1.Side1);
             }
+
             try
             {
                 d1.Side2 = -1;
@@ -115,6 +121,7 @@ namespace DominoTests
                 Console.WriteLine("Threw an exception when Side2 is negative");
                 Console.WriteLine("Side2 should still be 6 " + d1.Side2);
             }
+
             try
             {
                 d1.Side2 = 13;
@@ -124,6 +131,7 @@ namespace DominoTests
                 Console.WriteLine("Threw an exception when Side2 is more than 12");
                 Console.WriteLine("Side2 should still be 6 " + d1.Side2);
             }
+
             try
             {
                 d1 = new Domino(-1, 15);
@@ -133,6 +141,7 @@ namespace DominoTests
                 Console.WriteLine("Constructor should also throw an exception when values are invalid");
                 Console.WriteLine("d1 is now " + d1);
             }
+
             Console.WriteLine();
         }
 
@@ -166,14 +175,16 @@ namespace DominoTests
             Console.WriteLine("After.  Expecting 6, 12. " + d1);
             Console.WriteLine();
         }
+
         #endregion
 
         #region Boneyard Tests
+
         // Boneyard Test Methods
         static void TestBoneyardConstructor()
         {
             Boneyard b = new Boneyard(6);
-            
+
             Console.WriteLine("Testing constructor");
             Console.WriteLine("Expecting 28 dominoes:");
             int count = 1;
@@ -223,7 +234,7 @@ namespace DominoTests
         static void TestBoneyardShuffle()
         {
             Boneyard b = new Boneyard(6);
-            
+
             b.Shuffle();
 
             Console.WriteLine("Testing Shuffle");
@@ -244,7 +255,6 @@ namespace DominoTests
             }
 
             Console.WriteLine("Expecting true: " + b.IsEmpty());
-        
         }
 
         static void TestBoneyardDraw()
@@ -253,14 +263,11 @@ namespace DominoTests
 
             boneyard.Draw();
             boneyard.Draw();
-            
+
             Console.WriteLine("Testing Draw");
 
             Console.WriteLine("Expecting 26: " + boneyard.DominoesRemaining);
-            
         }
-
-
 
         #endregion
 
@@ -309,7 +316,7 @@ namespace DominoTests
             train2.Play(h, d1);
             Console.WriteLine(train2.ToString());
 
-            
+
             Console.WriteLine("Expecting error:");
             train.Play(h, d1);
         }
@@ -318,7 +325,7 @@ namespace DominoTests
         {
             Hand h = new Hand();
             PlayerTrain train = new PlayerTrain(h, 6);
-            
+
             Console.WriteLine("Testing IsOpen");
             Console.WriteLine("Expecting false: " + train.IsOpen);
             train.Open();
@@ -344,10 +351,76 @@ namespace DominoTests
             PlayerTrain train = new PlayerTrain(h, 6);
             PlayerTrain train2 = new PlayerTrain(h, 4);
             bool mustFlip;
-            
+
             Console.WriteLine("Testing IsPlayable");
             Console.WriteLine("Expecting true: " + train.IsPlayable(h, d1, out mustFlip));
             Console.WriteLine("Expecting false: " + train2.IsPlayable(h, d1, out mustFlip));
+        }
+
+        #endregion
+
+        #region Interface Tests
+
+        static void TestIComparable()
+        {
+            List<Domino> dominoes = new List<Domino>
+            {
+                new Domino(0, 2),
+                new Domino(9, 12),
+                new Domino(12, 12),
+                new Domino(6, 5)
+            };
+
+            Console.WriteLine("Testing IComparable");
+            Console.WriteLine("Before sorting:");
+            foreach (Domino d in dominoes)
+            {
+                Console.WriteLine(d);
+            }
+
+            dominoes.Sort();
+
+            Console.WriteLine("After sorting:");
+            foreach (Domino d in dominoes)
+            {
+                Console.WriteLine(d);
+            }
+        }
+
+        static void TestIEnumerable()
+        {
+            List<Domino> dominoes = new List<Domino>
+            {
+                new Domino(0, 2),
+                new Domino(9, 12),
+                new Domino(12, 12),
+                new Domino(6, 5)
+            };
+
+            MexicanTrain train = new MexicanTrain();
+            train.Add(dominoes[0]);
+            train.Add(dominoes[1]);
+            train.Add(dominoes[2]);
+            train.Add(dominoes[3]);
+
+            PlayerTrain playerTrain = new PlayerTrain(new Hand());
+            playerTrain.Add(dominoes[0]);
+            playerTrain.Add(dominoes[1]);
+            playerTrain.Add(dominoes[2]);
+            playerTrain.Add(dominoes[3]);
+
+            Console.WriteLine("Testing IEnumerable");
+            Console.WriteLine("Expecting 4 dominoes in Mexican Train:");
+            foreach (Domino d in train)
+            {
+                Console.WriteLine(d);
+            }
+
+            Console.WriteLine("Expecting 4 dominoes in Player Train:");
+            foreach (Domino d in playerTrain)
+            {
+                Console.WriteLine(d);
+            }
         }
 
         #endregion
